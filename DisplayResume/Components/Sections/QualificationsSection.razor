@@ -1,0 +1,15 @@
+﻿<ResumeSection Delimiter=@Delimiter Title="Qualifications">
+	<ul>
+		@foreach (string statement in Qualifications)
+		{
+			<li>@statement</li>
+		}
+	</ul>
+	<br>
+</ResumeSection>
+
+@code {
+	[Parameter] public IList<string> Qualifications { get; set; } = [];
+	[Parameter] public string Delimiter { get; set; } = string.Empty;
+
+}

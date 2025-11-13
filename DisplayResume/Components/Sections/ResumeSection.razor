@@ -1,0 +1,12 @@
+﻿<section>
+	<h5>
+		<b>@Title@Delimiter</b>
+	</h5>
+    @ChildContent
+</section>
+
+@code {
+    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public string Delimiter { get; set; } = string.Empty;
+    [Parameter] public RenderFragment ChildContent { get; set; } = default!;
+}

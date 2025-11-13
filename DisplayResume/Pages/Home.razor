@@ -1,0 +1,102 @@
+﻿@page "/"
+@using DisplayResume.Models
+@using DisplayResume.Models.Enums
+
+<PageTitle>Resume - @Resume.GetMyName()</PageTitle>
+
+<div class="resume-container">
+
+	<header>
+		<h4><b>@Resume.GetMyName()</b></h4>
+		<div>
+			<div>
+				<span>@Resume.GetMyAddress()</span>
+
+			</div>
+		</div>
+	</header>
+	<br>
+
+	<section>
+		<h5><b>Qualifications</b></h5>
+		<ul>
+			@foreach (string statement in Resume.Qualifications)
+			{
+				<li>@statement</li>
+			}
+		</ul>
+	</section>
+	<br>
+
+	<section>
+		<h5><b>Summary</b></h5>
+		<p>@Resume.Summary</p>
+	</section>
+	<br>
+
+	<section>
+		<h5><b>Experience:</b></h5>
+		@foreach (Organization experience in Resume.Organizations)
+		{
+			<div>
+				<b>
+					<span>@experience.Positions.First().GetPositionTitle(delimiter)</span>
+					<span>@experience.GetOrgShortDuration(delimiter)</span>
+				</b>
+			</div>
+
+			<div>
+				<b>@experience.GetName()</b>
+			</div>
+
+			<p>@experience.GetOrganizationDescription()</p>
+
+			<ul>
+				@foreach (KeyValuePair<int, string> duty in @experience.Positions.First().Duties)
+				{
+					<li>@duty.Value.TrimEnd('.')</li>
+				}
+			</ul>
+			<br>
+		}
+
+	</section>
+
+	<section>
+		<h5><b>Education</b></h5>
+		@foreach (Education education in Resume.Education)
+		{
+			<div>
+				<span>@education.GetName(delimiter)</span>
+				<span>@education.GetDuration()</span>
+				<span>@education.GetDetails()</span>
+			</div>
+
+			@if (education.Studies.Any())
+			{
+				<ul>
+					@foreach (string study in education.Studies)
+					{
+						<li>@study</li>
+					}
+				</ul>
+			}
+		}
+
+	</section>
+	<br>
+
+</div>
+
+@code {
+	private Resume Resume = new ResumeData().DeanMorrisonv2;
+	private string delimiter = ",";
+
+	protected override Task OnInitializedAsync()
+	{
+		Resume.SetDescriptors();
+		Resume.GetTimeLimtedOrganizations();
+
+		return Task.CompletedTask;
+	}
+}

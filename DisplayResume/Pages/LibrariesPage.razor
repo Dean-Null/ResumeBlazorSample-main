@@ -1,0 +1,14 @@
+﻿@page "/Libraries"
+@using DisplayResume.Components.Sections
+@using DisplayResume.Models
+
+<PageTitle>Libraries and Frameworks</PageTitle>
+
+<div class="resume-container">
+	<TechnologiesSection Technologies=TechList />
+</div>
+
+@code{
+	private List<Technology> TechList = TechnologiesList.TechnologiesListAll;
+
+}

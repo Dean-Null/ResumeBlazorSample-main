@@ -1,0 +1,16 @@
+﻿@using DisplayResume.Components.Details
+@using DisplayResume.Models
+
+<ResumeSection Delimiter=@Delimiter Title="Education">
+    @foreach (Education institution in Education)
+    {
+        <EducationContent Delimiter="," Education=@institution />
+    }
+    <br>
+</ResumeSection>
+
+@code {
+    [Parameter] public IList<Education> Education { get; set; } = [];
+    [Parameter] public string Delimiter { get; set; } = string.Empty;
+
+}

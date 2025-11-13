@@ -1,0 +1,18 @@
+﻿@using DisplayResume.Data
+@using DisplayResume.Models
+@using DisplayResume.Models.Enums
+
+<ResumeSection Delimiter=@Delimiter Title="Technologies">
+	@foreach (Technology tech in TechnologiesList.TechnologiesListAll.OrderBy(e => e.Name))
+	{
+		@* <h7>@techFocus.GetDisplayShortName(): </h7> *@
+		<span class="tech-badge">@tech.Name, </span>
+	}
+	<br>
+</ResumeSection>
+
+@code {
+	[Parameter] public Resume TechResume { get; set; } = new();
+	[Parameter] public string Delimiter { get; set; } = string.Empty;
+
+}

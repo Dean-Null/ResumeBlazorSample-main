@@ -1,0 +1,66 @@
+﻿@page "/cv"
+@using DisplayResume.Models
+@using DisplayResume.Models.Enums
+
+<PageTitle>Curriculum Vitae</PageTitle>
+
+<div class="resume-container">
+
+	<header>
+		<h4><b>Curriculum Vitae - CV</b></h4>
+	</header>
+	<br>
+
+	<section>
+		<h5><b>Qualifications</b></h5>
+		<ul>
+			@foreach (string statement in Resume.Qualifications)
+			{
+				<li>@statement</li>
+			}
+		</ul>
+	</section>
+	<br>
+
+	<section>
+		<h5><b>Experience</b></h5>
+		@foreach (Organization experience in Resume.Organizations)
+		{
+			<div>
+				<span><b>@experience.GetName(": ")</b></span>
+				<span>@experience.Employment.GetDisplayName()@delimiter</span>
+				<span>@experience.GetOrgDuration(delimiter)</span>
+				<span>@experience.GetLastPositionName()</span>
+			</div>
+		}
+
+	</section>
+	<br>
+
+	<section>
+		<h5><b>Education</b></h5>
+		@foreach (Education education in Resume.Education)
+		{
+			<div>
+				<span>
+					<b>@education.GetName(delimiter)</b>
+				</span>
+				<span>@education.GetDuration()</span>
+				<span>@education.GetDetails()</span>
+			</div>
+		}
+
+	</section>
+	<br>
+
+</div>
+
+@code {
+	private Resume Resume = new ResumeData().DeanMorrison;
+	private string delimiter = ",";
+
+	protected override Task OnInitializedAsync()
+	{
+		return Task.CompletedTask;
+	}
+}

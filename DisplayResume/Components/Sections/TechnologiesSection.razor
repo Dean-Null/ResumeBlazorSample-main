@@ -1,0 +1,25 @@
+﻿@using DisplayResume.Components.Details
+@using DisplayResume.Data
+@using DisplayResume.Models
+@using DisplayResume.Models.Enums
+
+<ResumeSection Delimiter=@Delimiter Title="Library, Frameworks, and Tools">
+
+    @foreach (EnumFocus focusTech in EnumData.GetFocustList())
+    {
+        List<Technology> focusedTech = Technologies.Where(tech => tech.Focus == focusTech).ToList();
+        <h7>@focusTech.GetDisplayName(): </h7>
+        @foreach (Technology technology in focusedTech)
+        {
+            <TechnologyContent Delimiter="," Technology=@technology Technologies=@focusedTech/>
+        }
+        <br>
+    }
+   @* No line break to prevent double line breaks *@ 
+</ResumeSection>
+
+@code {
+    [Parameter] public IList<Technology> Technologies { get; set; } = [];
+    [Parameter] public string Delimiter { get; set; } = string.Empty;
+
+}

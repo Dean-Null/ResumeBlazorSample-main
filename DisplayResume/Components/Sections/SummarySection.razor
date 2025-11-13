@@ -1,0 +1,10 @@
+﻿<ResumeSection Delimiter=@Delimiter Title="Summary">
+    <p>@SummaryText</p>
+    <br>
+</ResumeSection>
+
+@code {
+    [Parameter] public string SummaryText { get; set; } = string.Empty;
+    [Parameter] public string Delimiter { get; set; } = string.Empty;
+
+}

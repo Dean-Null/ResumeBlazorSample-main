@@ -1,0 +1,20 @@
+﻿@using DisplayResume.Models
+
+@if (!Technology.Retired)
+{
+	<span class="tech-badge">
+		<a href="@Technology.URL" target="_blank">@Technology.GetName(Delimiter, Technologies) </a>
+	</span>
+}
+else
+{
+	<span class="tech-badge">@Technology.GetName(Delimiter, Technologies)</span>
+}
+
+@code {
+	[Parameter] public Technology Technology { get; set; } = new();
+	[Parameter] public List<Technology> Technologies { get; set; } = new();
+    [Parameter] public string Delimiter { get; set; } = string.Empty;
+
+}
+

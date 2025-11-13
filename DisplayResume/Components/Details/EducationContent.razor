@@ -1,0 +1,25 @@
+﻿@using DisplayResume.Models
+
+<div>
+	<span>@Education.GetName(Delimiter)</span>
+	<span>@Education.GetDuration()</span>
+	<span>@Education.VerboseDegree()</span>
+	
+</div>
+
+
+@if (Education.Studies.Any())
+{
+	<ul>
+		@foreach (string study in Education.Studies)
+		{
+			<li>@study</li>
+		}
+	</ul>
+}
+
+@code {
+	[Parameter] public Education Education { get; set; } = new();
+	[Parameter] public string Delimiter { get; set; } = string.Empty;
+
+}

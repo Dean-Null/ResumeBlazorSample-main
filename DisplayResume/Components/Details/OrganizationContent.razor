@@ -1,0 +1,34 @@
+﻿@using DisplayResume.Models
+@using DisplayResume.Models.Enums
+
+<section>
+	<div>
+		<b>
+			<span>@Organization.GetName(Delimiter)</span>
+		</b>
+			<span>@Organization.GetAddress(Delimiter)</span>
+	</div>
+
+	<div>
+		<b>
+			<span>@Organization.Positions.First().GetPositionTitle(Delimiter)</span>
+		</b>
+			<span>@Organization.GetOrgDuration()</span>
+	</div>
+
+	<p>@Organization.GetOrganizationDescription()</p>
+
+	<ul>
+		@foreach (KeyValuePair<int, string> duty in @Organization.Positions.First().Duties)
+		{
+			<li>@duty.Value.TrimEnd('.')</li>
+		}
+	</ul>
+	<br>
+
+</section>
+
+@code {
+	[Parameter] public Organization Organization { get; set; } = new();
+    [Parameter] public string Delimiter { get; set; } = string.Empty;
+}

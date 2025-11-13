@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<Target Name="_RemovePublishDirBeforePublishing" BeforeTargets="BeforePublish">
+		<RemoveDir Directories="$(PublishDir)" Condition="'$(PublishDir)' != ''" />
+	</Target>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.8" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EditorConfigFiles Remove="C:\Users\Dean\source\repos\MyResume\DisplayResume\.editorconfig" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="C:\Users\Dean\source\repos\MyResume\DisplayResume\.editorconfig" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,17 @@
+﻿@using DisplayResume.Components.Details
+@using DisplayResume.Models
+
+<ResumeSection Delimiter=@Delimiter Title="Experience">
+    @foreach (Organization organization in Organizations)
+    {
+        <OrganizationContent Delimiter="," Organization=@organization />
+    }
+    @* No line break to prevent double line breaks *@
+</ResumeSection>
+
+@code {
+    [Parameter] public IList<Organization> Organizations { get; set; } = [];
+    [Parameter] public string Delimiter { get; set; } = string.Empty;
+
+}
+
