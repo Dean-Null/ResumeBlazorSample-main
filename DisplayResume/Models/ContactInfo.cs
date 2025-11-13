@@ -8,8 +8,8 @@ namespace DisplayResume.Models
 	{
 		public ContactInfo() => Header = "ContactInfo";
 
-		public string URLAddress = "";
-		public string URLLinkedIn = "";
+		public string URLAddress { get; set; } = string.Empty;
+		public string URLLinkedIn { get; set; } = string.Empty;
 
 		[MaxLength(36)]
 		public string FirstName { get; set; } = string.Empty;

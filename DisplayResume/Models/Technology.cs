@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using DisplayResume.Models.Enums;
+using DisplayResume.Models.Extensions;
 
 namespace DisplayResume.Models
 {
@@ -19,7 +20,7 @@ namespace DisplayResume.Models
 				return $"{Name}{delimiter}";
 			}
 
-			return $"{Name}";
+			return Name;
 		}
 
 		public string GetUrl()
@@ -47,7 +48,7 @@ namespace DisplayResume.Models
 			StringBuilder sb = new();
 			if (string.IsNullOrEmpty(ProperName))
 			{
-				sb.AppendLine($"{Name}");
+				sb.AppendLine(Name);
 			}
 			else
 			{

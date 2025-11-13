@@ -1,11 +1,11 @@
-﻿@using DisplayResume.Data
-@using DisplayResume.Models
+﻿@using DisplayResume.Models
 @using DisplayResume.Models.Enums
+@using DisplayResume.Models.Extensions
 
 <ResumeSection Delimiter=@Delimiter Title="Technologies">
-	@foreach (Technology tech in TechnologiesList.TechnologiesListAll.OrderBy(e => e.Name))
+	@foreach (Technology tech in new List<Technology>())
 	{
-		@* <h7>@techFocus.GetDisplayShortName(): </h7> *@
+		<h7>@tech.Focus.GetDisplayShortName(): </h7>
 		<span class="tech-badge">@tech.Name, </span>
 	}
 	<br>

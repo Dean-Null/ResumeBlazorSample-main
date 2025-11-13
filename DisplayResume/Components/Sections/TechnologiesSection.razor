@@ -1,11 +1,11 @@
 ﻿@using DisplayResume.Components.Details
-@using DisplayResume.Data
 @using DisplayResume.Models
 @using DisplayResume.Models.Enums
+@using DisplayResume.Models.Extensions
 
 <ResumeSection Delimiter=@Delimiter Title="Library, Frameworks, and Tools">
 
-    @foreach (EnumFocus focusTech in EnumData.GetFocustList())
+	@foreach (EnumFocus focusTech in Enum.GetValues<EnumFocus>().OrderBy(focus => focus.GetDisplayName()).Cast<EnumFocus>())
     {
         List<Technology> focusedTech = Technologies.Where(tech => tech.Focus == focusTech).ToList();
         <h7>@focusTech.GetDisplayName(): </h7>

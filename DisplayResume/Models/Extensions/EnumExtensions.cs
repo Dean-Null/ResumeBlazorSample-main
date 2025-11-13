@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace DisplayResume.Models.Enums
+namespace DisplayResume.Models.Extensions
 {
     public static class EnumExtensions
     {

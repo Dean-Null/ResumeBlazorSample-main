@@ -1,6 +1,7 @@
 ﻿@page "/cv"
 @using DisplayResume.Models
 @using DisplayResume.Models.Enums
+@using DisplayResume.Models.Extensions
 
 <PageTitle>Curriculum Vitae</PageTitle>
 
@@ -56,7 +57,7 @@
 </div>
 
 @code {
-	private Resume Resume = new ResumeData().DeanMorrison;
+	private Resume Resume = new();
 	private string delimiter = ",";
 
 	protected override Task OnInitializedAsync()

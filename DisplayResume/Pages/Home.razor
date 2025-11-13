@@ -89,12 +89,11 @@
 </div>
 
 @code {
-	private Resume Resume = new ResumeData().DeanMorrisonv2;
+	private Resume Resume = new ();
 	private string delimiter = ",";
 
 	protected override Task OnInitializedAsync()
 	{
-		Resume.SetDescriptors();
 		Resume.GetTimeLimtedOrganizations();
 
 		return Task.CompletedTask;

@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using DisplayResume.Models.Enums;
+using DisplayResume.Models.Extensions;
 
 namespace DisplayResume.Models
 {
@@ -61,12 +62,17 @@ namespace DisplayResume.Models
 			Technologies.Where(tech => tech.Focus == focusValue)
 			.ToList();
 
+		public static IEnumerable<EnumFocus> GetFocustList()
+		{
+			return Enum.GetValues<EnumFocus>().OrderBy(focus => focus.GetDisplayName()).Cast<EnumFocus>();
+		}
+
 		public Dictionary<string, string> PrintList()
 		{
 			Dictionary<string, string> dict = new();
 			StringBuilder stringBuilder = new();
 
-			foreach (EnumFocus techFocus in EnumData.GetFocustList())
+			foreach (EnumFocus techFocus in GetFocustList())
 			{
 				string techlist = string.Empty;
 				stringBuilder.AppendLine($"{techFocus.GetDisplayShortName()}: ");
@@ -87,30 +93,6 @@ namespace DisplayResume.Models
 			}
 
 			return dict;
-		}
-
-		public void SetDescriptors(int multipler = 1)
-		{
-			foreach (Organization experience in Organizations)
-			{
-				foreach (Position position in experience.Positions)
-				{
-					position.GetUniqueDuties(experience.descriptionLimit * multipler, UsedDescriptors);
-					UsedDescriptors.AddRange(position.Duties.Values.ToList());
-				}
-			}
-		}
-
-		public void SetCustomDescriptors()
-		{
-			foreach (Organization experience in Organizations)
-			{
-				foreach (Position position in experience.Positions)
-				{
-					position.GetParameterDuties(experience.descriptionLimit, UsedDescriptors);
-					UsedDescriptors.AddRange(position.Duties.Values.ToList());
-				}
-			}
 		}
 
 		public override bool Equals(object? obj)

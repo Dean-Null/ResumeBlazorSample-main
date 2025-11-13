@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text;
 using DisplayResume.Models.Enums;
+using DisplayResume.Models.Extensions;
 
 namespace DisplayResume.Models
 {
@@ -17,16 +18,7 @@ namespace DisplayResume.Models
 		public List<string> Released { get; set; } = [];
 		public string OrganizationDescription { get; set; } = string.Empty;
 
-		internal int descriptionLimit = 6;
-
 		public Organization() { }
-
-		public Organization(int limit)
-		{
-			descriptionLimit = limit;
-		}
-
-		public int GetDescriptionLimit() => descriptionLimit;
 
 		public string GetOrganizationDescription()
 		{
@@ -48,19 +40,9 @@ namespace DisplayResume.Models
 			return Duration.GetNumericalDuration() + delimiter;
 		}
 
-		public bool IsFirstListing(Position checkPosition)
-		{
-			return Positions.First().Equals(checkPosition);
-		}
-
 		public string GetAddress(string delimiter = "")
 		{
 			return Address.CityState() + delimiter;
-		}
-
-		public bool IsConsulting()
-		{
-			return Name.Contains("TAP") || Name.Contains("Ambient");
 		}
 
 		public string GetLastPositionName()

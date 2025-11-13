@@ -15,11 +15,6 @@ namespace DisplayResume.Models
 		public string Minor { get; set; } = string.Empty;
 		public IList<string> Studies { get; set; } = [];
 
-		public string GetName()
-		{
-			return Name;
-		}
-
 		public string GetName(string delimiter)
 		{
 			return Name + delimiter;
