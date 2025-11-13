@@ -15,7 +15,6 @@ namespace DisplayResume.Models
 			Education = Education.OrderByDescending(edu => edu.Duration.EndDate).ToList();
 			Organizations = Organizations.OrderByDescending(org => org.Duration.EndDate).ToList();
 			Technologies = Technologies.OrderByDescending(tech => tech.Focus).ToList();
-			TechDict = PrintList();
 		}
 
 		public string Summary { get; set; } = string.Empty;
@@ -27,9 +26,7 @@ namespace DisplayResume.Models
 			set => organizations = value;
 		}
 		public List<Technology> Technologies { get; set; } = [];
-		public List<string> UsedDescriptors { get; set; } = [];
 		public List<string> Qualifications { get; set; } = [];
-		public Dictionary<string, string> TechDict { get; set; }
 
 		public string GetMyName()
 		{
@@ -39,11 +36,6 @@ namespace DisplayResume.Models
 		public string GetMyAddress()
 		{
 			return Contact.Address.USAddress();
-		}
-
-		public void GetTimeLimtedOrganizations()
-		{
-			Organizations = Organizations.Where(org => org.Duration.EndDate >= timelimit).OrderByDescending(org => org.Duration.EndDate).ToList();
 		}
 
 		public List<Technology> GetTechnologyFocus(EnumFocus focusValue) =>
@@ -96,12 +88,12 @@ namespace DisplayResume.Models
 		public override int GetHashCode()
 		{
 			return HashCode.Combine(
-                Contact,
-                Summary,
-                Organizations.Count,
-                Education.Count,
-                Technologies.Count
-            );
+				Contact,
+				Summary,
+				Organizations.Count,
+				Education.Count,
+				Technologies.Count
+			);
 		}
 
 		public override string? ToString()

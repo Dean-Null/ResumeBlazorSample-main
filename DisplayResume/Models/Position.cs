@@ -1,33 +1,15 @@
 ﻿using System.Text;
-using DisplayResume.Models.Enums;
-using DisplayResume.Models.Extensions;
 
 namespace DisplayResume.Models
 {
 	public class Position
 	{
-		public Position() { }
-
-		public Position(
-			Dictionary<int, string> duties,
-			Dictionary<int, string> preselectedDuties,
-			EnumPositionRole role
-			)
-		{
-			Role = role;
-			Duties = duties;
-			PreselectedDuties = preselectedDuties;
-
-		}
-
-		public EnumPositionRole Role { get; set; } = EnumPositionRole.None;
-		public Dictionary<int, string> Duties { get; set; } = [];
-		public Dictionary<int, string> PreselectedDuties { get; set; } = [];
-		public Dictionary<int, string> DutiesPool { get; set; } = [];
+		public string Role { get; set; } = string.Empty;
+		public List<string> Duties { get; set; } = [];
 
 		public string GetPositionTitle(string delimiter = "")
 		{
-			return Role.GetDisplayName() + delimiter;
+			return Role + delimiter;
 		}
 
 		public override bool Equals(object? obj)
@@ -38,18 +20,18 @@ namespace DisplayResume.Models
 
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(Role);
+			return HashCode.Combine(Role, Duties.Count);
 		}
 
 		public override string? ToString()
 		{
 			StringBuilder sb = new();
 
-			sb.AppendLine(Role.GetDisplayName());
+			sb.AppendLine(Role);
 
-			foreach (KeyValuePair<int, string> item in Duties)
+			foreach (string item in Duties)
 			{
-				sb.AppendLine("\t" + item.Value.ToString());
+				sb.AppendLine("\t" + item.ToString());
 			}
 
 			return sb.ToString();

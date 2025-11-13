@@ -13,7 +13,7 @@ namespace DisplayResume.Models
 		public bool HasGraduated { get; set; } = true;
 		public string Major { get; set; } = string.Empty;
 		public string Minor { get; set; } = string.Empty;
-		public IList<string> Studies { get; set; } = [];
+		public List<string> Studies { get; set; } = [];
 
 		public string GetName(string delimiter)
 		{
@@ -39,29 +39,30 @@ namespace DisplayResume.Models
 
 		public override bool Equals(object? obj)
 		{
-            return obj is Education education &&
-                   Name == education.Name &&
-                   Degree == education.Degree &&
-                   Address.Equals(education.Address) &&
-                   Duration.Equals(education.Duration) &&
-                   HasGraduated == education.HasGraduated &&
-                   Major == education.Major &&
-                   Minor == education.Minor &&
-                   Studies.ToHashSet().SetEquals(education.Studies);
+			return obj is Education education &&
+				   Name == education.Name &&
+				   Degree == education.Degree &&
+				   Address.Equals(education.Address) &&
+				   Duration.Equals(education.Duration) &&
+				   HasGraduated == education.HasGraduated &&
+				   Major == education.Major &&
+				   Minor == education.Minor &&
+				   Studies.ToHashSet().SetEquals(education.Studies);
 		}
 
 		public override int GetHashCode()
 		{
 			return HashCode.Combine(
-                Name,
-                Degree,
-                Address,
-                Duration,
-                HasGraduated,
-                Major,
-                Minor,
-                Studies.Count
-            );		}
+				Name,
+				Degree,
+				Address,
+				Duration,
+				HasGraduated,
+				Major,
+				Minor,
+				Studies.Count
+			);
+		}
 
 		public override string? ToString()
 		{
@@ -79,19 +80,20 @@ namespace DisplayResume.Models
 		{
 			StringBuilder sb = new();
 
-            sb.AppendLine(Name);
-            sb.AppendLine(Address.ToString());
-            sb.AppendLine(GetDuration());
-            sb.AppendLine(GetDetails());
-            if (Studies.Count > 0)
-            {
-                foreach (string study in Studies)
-                {
-                    sb.AppendLine(study);
-                }
-            }
+			sb.AppendLine(Name);
+			sb.AppendLine(Address.ToString());
+			sb.AppendLine(GetDuration());
+			sb.AppendLine(GetDetails());
+			if (Studies.Count > 0)
+			{
+				foreach (string study in Studies)
+				{
+					sb.AppendLine(study);
+				}
+			}
 
-            return sb.ToString();		}
+			return sb.ToString();
+		}
 
 	}
 }

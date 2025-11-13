@@ -11,9 +11,9 @@ namespace DisplayResume.Models
 		[MaxLength(36)]
 		public string City { get; set; } = string.Empty;
 		[MaxLength(2)]
-		public string State { get; set; } = "";
-		public int PostalCode { get; set; }
-		public string Country { get; set; } = "";
+		public string State { get; set; } = string.Empty;
+		public string PostalCode { get; set; } = string.Empty;
+		public string Country { get; set; } = string.Empty;
 
 		internal string AddressStart() => $"{AddressFirst}";
 
@@ -34,7 +34,7 @@ namespace DisplayResume.Models
 
 		public override int GetHashCode()
 		{
-            return HashCode.Combine(AddressFirst, AddressSecond, City, State, PostalCode, Country);
+			return HashCode.Combine(AddressFirst, AddressSecond, City, State, PostalCode, Country);
 		}
 
 		public override string? ToString() => FullAddress();

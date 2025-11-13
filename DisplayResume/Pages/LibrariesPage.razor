@@ -1,5 +1,6 @@
 ﻿@page "/Libraries"
 @using DisplayResume.Components.Sections
+@using DisplayResume.FakerData
 @using DisplayResume.Models
 
 <PageTitle>Libraries and Frameworks</PageTitle>
@@ -9,5 +10,5 @@
 </div>
 
 @code{
-	private List<Technology> TechList = [];
+	private List<Technology> TechList = new FakerTechnology().Generate(5);
 }

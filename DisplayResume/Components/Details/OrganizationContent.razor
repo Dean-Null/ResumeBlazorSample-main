@@ -19,9 +19,9 @@
 	<p>@Organization.GetOrganizationDescription()</p>
 
 	<ul>
-		@foreach (KeyValuePair<int, string> duty in @Organization.Positions.First().Duties)
+		@foreach (string duty in @Organization.Positions.First().Duties)
 		{
-			<li>@duty.Value.TrimEnd('.')</li>
+			<li>@duty.TrimEnd('.')</li>
 		}
 	</ul>
 	<br>

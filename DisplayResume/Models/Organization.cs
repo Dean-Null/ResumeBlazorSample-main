@@ -14,15 +14,12 @@ namespace DisplayResume.Models
 		public Duration Duration { get; set; } = new();
 		public EnumEmployment Employment { get; set; } = EnumEmployment.None;
 		public string Description { get; set; } = string.Empty;
-		public List<string> CommonDuties { get; set; } = [];
-		public List<string> Released { get; set; } = [];
-		public string OrganizationDescription { get; set; } = string.Empty;
 
 		public Organization() { }
 
 		public string GetOrganizationDescription()
 		{
-			return OrganizationDescription;
+			return Description;
 		}
 
 		public string GetName(string delimiter = "")
@@ -47,7 +44,7 @@ namespace DisplayResume.Models
 
 		public string GetLastPositionName()
 		{
-			return Positions.Last().Role.GetDisplayName();
+			return Positions.Last().Role;
 		}
 
 		public override bool Equals(object? obj)
@@ -62,11 +59,11 @@ namespace DisplayResume.Models
 		public override int GetHashCode()
 		{
 			return HashCode.Combine(
-                Name,
-                Address,
-                Positions.Count,
-                Duration
-            );
+				Name,
+				Address,
+				Positions.Count,
+				Duration
+			);
 		}
 
 		public override string? ToString()
@@ -80,7 +77,6 @@ namespace DisplayResume.Models
 			sb.AppendLine(Name);
 			sb.AppendLine(Address.USAddress());
 			sb.AppendLine(GetOrganizationDescription());
-			sb.AppendLine(string.Join(", ", Released));
 
 			return sb.ToString();
 		}

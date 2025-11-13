@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using Bogus
+@using DisplayResume.FakerData
 @using DisplayResume.Models
 @using DisplayResume.Models.Enums
 
@@ -52,9 +54,9 @@
 			<p>@experience.GetOrganizationDescription()</p>
 
 			<ul>
-				@foreach (KeyValuePair<int, string> duty in @experience.Positions.First().Duties)
+				@foreach (string duty in @experience.Positions.First().Duties)
 				{
-					<li>@duty.Value.TrimEnd('.')</li>
+					<li>@duty.TrimEnd('.')</li>
 				}
 			</ul>
 			<br>
@@ -89,13 +91,8 @@
 </div>
 
 @code {
-	private Resume Resume = new();
+	private Resume Resume = new FakerResume().Generate();
+
 	private string delimiter = ",";
 
-	protected override Task OnInitializedAsync()
-	{
-		Resume.GetTimeLimtedOrganizations();
-
-		return Task.CompletedTask;
-	}
 }

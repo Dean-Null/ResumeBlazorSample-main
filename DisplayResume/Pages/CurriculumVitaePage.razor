@@ -1,4 +1,5 @@
 ﻿@page "/cv"
+@using DisplayResume.FakerData
 @using DisplayResume.Models
 @using DisplayResume.Models.Enums
 @using DisplayResume.Models.Extensions
@@ -57,11 +58,7 @@
 </div>
 
 @code {
-	private Resume Resume = new();
+	private Resume Resume = new FakerResume().Generate();
 	private string delimiter = ",";
 
-	protected override Task OnInitializedAsync()
-	{
-		return Task.CompletedTask;
-	}
 }
