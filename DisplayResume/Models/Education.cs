@@ -39,20 +39,29 @@ namespace DisplayResume.Models
 
 		public override bool Equals(object? obj)
 		{
-			return obj is Education education &&
-				   Name == education.Name &&
-				   Degree == education.Degree &&
-				   Address.Equals(education.Address) &&
-				   Duration.Equals(education.Duration) &&
-				   HasGraduated == education.HasGraduated &&
-				   Major == education.Major &&
-				   Minor == education.Minor;
+            return obj is Education education &&
+                   Name == education.Name &&
+                   Degree == education.Degree &&
+                   Address.Equals(education.Address) &&
+                   Duration.Equals(education.Duration) &&
+                   HasGraduated == education.HasGraduated &&
+                   Major == education.Major &&
+                   Minor == education.Minor &&
+                   Studies.ToHashSet().SetEquals(education.Studies);
 		}
 
 		public override int GetHashCode()
 		{
-			throw new NotImplementedException();
-		}
+			return HashCode.Combine(
+                Name,
+                Degree,
+                Address,
+                Duration,
+                HasGraduated,
+                Major,
+                Minor,
+                Studies.Count
+            );		}
 
 		public override string? ToString()
 		{
@@ -68,8 +77,21 @@ namespace DisplayResume.Models
 
 		public override string PrintSection()
 		{
-			throw new NotImplementedException();
-		}
+			StringBuilder sb = new();
+
+            sb.AppendLine(Name);
+            sb.AppendLine(Address.ToString());
+            sb.AppendLine(GetDuration());
+            sb.AppendLine(GetDetails());
+            if (Studies.Count > 0)
+            {
+                foreach (string study in Studies)
+                {
+                    sb.AppendLine(study);
+                }
+            }
+
+            return sb.ToString();		}
 
 	}
 }

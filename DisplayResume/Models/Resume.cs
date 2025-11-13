@@ -95,7 +95,13 @@ namespace DisplayResume.Models
 
 		public override int GetHashCode()
 		{
-			throw new NotImplementedException();
+			return HashCode.Combine(
+                Contact,
+                Summary,
+                Organizations.Count,
+                Education.Count,
+                Technologies.Count
+            );
 		}
 
 		public override string? ToString()

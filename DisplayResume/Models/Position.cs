@@ -38,7 +38,7 @@ namespace DisplayResume.Models
 
 		public override int GetHashCode()
 		{
-			throw new NotImplementedException();
+			return HashCode.Combine(Role);
 		}
 
 		public override string? ToString()

@@ -40,7 +40,7 @@ namespace DisplayResume.Models
 
 		public override int GetHashCode()
 		{
-			throw new NotImplementedException();
+            return HashCode.Combine(Description, Focus, Name, ProperName, Retired, URL);
 		}
 
 		public override string? ToString()

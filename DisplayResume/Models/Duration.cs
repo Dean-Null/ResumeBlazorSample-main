@@ -28,7 +28,7 @@
 
 		public override int GetHashCode()
 		{
-			throw new NotImplementedException();
+            return HashCode.Combine(StartDate, EndDate);
 		}
 
 		public override string? ToString() => GetNumericalDuration();

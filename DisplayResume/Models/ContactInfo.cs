@@ -38,14 +38,14 @@ namespace DisplayResume.Models
 
 		public override int GetHashCode()
 		{
-			throw new NotImplementedException();
+            return HashCode.Combine(FirstName, MiddleName, LastName, Address, PhoneNumber, EmailAddress);
 		}
 
 		public override string? ToString()
 		{
 			StringBuilder sb = new();
 
-			sb.AppendLine($"{FirstName} {LastName}");
+			sb.AppendLine(FirstLastName());
 			sb.AppendLine(Address.ToString());
 			sb.AppendLine(PhoneNumber);
 			sb.AppendLine(EmailAddress);
@@ -55,7 +55,15 @@ namespace DisplayResume.Models
 
 		public override string PrintSection()
 		{
-			throw new NotImplementedException();
+			StringBuilder sb = new();
+
+			sb.AppendLine(FirstLastName());
+			sb.AppendLine(Address.ToString());
+			sb.AppendLine(PhoneNumber);
+			sb.AppendLine(EmailAddress);
+
+			return sb.ToString();
+		
 		}
 	}
 }

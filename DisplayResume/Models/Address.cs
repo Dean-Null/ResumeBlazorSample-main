@@ -5,9 +5,9 @@ namespace DisplayResume.Models
 	public class Address
 	{
 		[MaxLength(36)]
-		public string Address1 { get; set; } = string.Empty;
+		public string AddressFirst { get; set; } = string.Empty;
 		[MaxLength(36)]
-		public string Address2 { get; set; } = string.Empty;
+		public string AddressSecond { get; set; } = string.Empty;
 		[MaxLength(36)]
 		public string City { get; set; } = string.Empty;
 		[MaxLength(2)]
@@ -15,7 +15,7 @@ namespace DisplayResume.Models
 		public int PostalCode { get; set; }
 		public string Country { get; set; } = "";
 
-		internal string AddressStart() => $"{Address1}";
+		internal string AddressStart() => $"{AddressFirst}";
 
 		public string CityState() => $"{City}, {State}".Trim(' ', ',');
 		public string USAddress() => $"{AddressStart()}, {CityState()} {PostalCode}".Trim(' ', ',');
@@ -24,8 +24,8 @@ namespace DisplayResume.Models
 		public override bool Equals(object? obj)
 		{
 			return obj is Address info &&
-				   Address1 == info.Address1 &&
-				   Address2 == info.Address2 &&
+				   AddressFirst == info.AddressFirst &&
+				   AddressSecond == info.AddressSecond &&
 				   City == info.City &&
 				   State == info.State &&
 				   PostalCode == info.PostalCode &&
@@ -34,7 +34,7 @@ namespace DisplayResume.Models
 
 		public override int GetHashCode()
 		{
-			throw new NotImplementedException();
+            return HashCode.Combine(AddressFirst, AddressSecond, City, State, PostalCode, Country);
 		}
 
 		public override string? ToString() => FullAddress();
